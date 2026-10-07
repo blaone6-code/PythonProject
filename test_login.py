@@ -21,3 +21,4 @@ def test_first(page: Page):
     error_message = page.get_by_test_id("login-error-inline")
     expect(error_message).to_be_visible()
     expect(error_message).to_have_text("Invalid login or password.")
+    #Проверка авторизации
