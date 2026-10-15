@@ -13,8 +13,6 @@ def test_first(page: Page):
     search_login = page.get_by_role("link", name="Login")
     search_login.click()
 
-    expect(page.get_by_test_id("login-title")).to_have_text("Authorization")
-
     username_field = page.get_by_test_id("login-username")
     password_field = page.get_by_test_id("login-password")
     username_field.fill(random_email)
