@@ -22,7 +22,9 @@ def test_first(page: Page):
 
     page.get_by_test_id("login-submit").click()
 
-    error_message_locator = page.get_by_test_id("login-error-inline")
+    error_message_locator = page.get_by_test_id("login-error-inline").get_by_text("Invalid login or password.")
+    error_message_locator.wait_for(state="visible", timeout=5000)
+
     actual_error = error_message_locator.inner_text()
     expected_error = "Invalid login or password."
 
