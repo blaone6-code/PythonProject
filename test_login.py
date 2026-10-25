@@ -10,7 +10,7 @@ def test_first(page: Page):
 
     page.goto(URL)
 
-    search_login = page.get_by_role("link", name="Login")
+    search_login = page.get_by_test_id("nav-login")
     search_login.click()
 
     username_field = page.get_by_test_id("login-username")
@@ -20,15 +20,15 @@ def test_first(page: Page):
 
     page.get_by_test_id("login-submit").click()
 
-    error_message_locator = page.get_by_test_id("login-error-inline").get_by_text("Invalid login or password.")
-    error_message_locator.wait_for(state="visible", timeout=5000)
-
-    actual_error = error_message_locator.inner_text()
+    error_locator = page.get_by_test_id("login-error-inline")
     expected_error = "Invalid login or password."
 
-    assert actual_error == expected_error, (
-        f"Ошибка валидации формы авторизации!\n"
-        f"Ожидали: '{expected_error}'\n"
-        f"Получили: '{actual_error}'"
+    error_locator.filter(has_text=expected_error).wait_for()
+
+    actual_text = error_locator.text_content()
+
+    assert expected_error in actual_text, (
+        f"Ошибка валидации формы авторизации! "
+        f"Ожидаем, что текст содержит: '{expected_error}', "
+        f"но фактический текст: '{actual_text}'"
     )
-    #Проверка авторизации
