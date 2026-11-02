@@ -13,13 +13,15 @@ def test_first(page: Page):
     page.get_by_test_id("login-submit").click()
 
     expected_error = "Invalid login or password."
+
     error_locator = page.get_by_test_id("login-error-inline")
-    error_locator.filter(has_text=expected_error).wait_for()
+
+    error_locator.wait_for(state="visible")
 
     actual_text = error_locator.inner_text()
 
     assert expected_error in actual_text, (
-        f"Ошибка валидации формы авторизации!\n"
-        f"Ожидаемый результат: '{expected_error}',\n"
+        f"Ошибка валидации формы авторизации! "
+        f"Ожидаемый результат: '{expected_error}', "
         f"Фактический результат: '{actual_text}'"
     )
