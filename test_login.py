@@ -2,7 +2,7 @@ from playwright.sync_api import Page
 from faker import Faker
 
 fake = Faker()
-URL = "http://2.26.162.45:8080/"
+URL = "http://177.1.186.119:5000/"
 
 
 def test_first(page: Page):
@@ -15,6 +15,8 @@ def test_first(page: Page):
     expected_error = "Invalid login or password."
 
     error_locator = page.get_by_test_id("login-error-inline")
+
+    error_locator.wait_for(state="hidden")
 
     error_locator.wait_for(state="visible")
 
