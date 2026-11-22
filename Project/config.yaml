@@ -1,0 +1,18 @@
+environment:
+  url: "http://metalmekid.duckdns.org:5000/"
+  browser: "chrome"
+
+test_data:
+  search_cases:
+    - name: "city"
+      n: 10
+      filter_value: "price_asc"
+    - name: "city"
+      n: 15
+      filter_value: "price_desc"
+    - name: "habits"
+      n: 10
+      filter_value: "price_asc"
+    - name: "habits"
+      n: 15
+      filter_value: "price_desc"
